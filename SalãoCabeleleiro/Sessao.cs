@@ -9,9 +9,9 @@ namespace SalãoCabeleleiro
     internal class Sessao
     {
     }
-    public enum ETipoUsuario
+    public static class SessaoUsuario
     {
-        Admin = 1,
-        Funcionario
+        public static string TipoUsuario { get; set; }
     }
+
 }

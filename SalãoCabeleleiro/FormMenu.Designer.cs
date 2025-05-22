@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             dataGridView1 = new DataGridView();
-            pictureBox1 = new PictureBox();
-            openFileDialog1 = new OpenFileDialog();
-            menuStrip1 = new MenuStrip();
+            mnsMenu = new MenuStrip();
             toolStripMenuItem1 = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripMenuItem();
             toolStripMenuItem3 = new ToolStripMenuItem();
@@ -41,9 +39,10 @@
             mnsMarcar = new ToolStripMenuItem();
             toolStripMenuItem7 = new ToolStripMenuItem();
             mnsSair = new ToolStripMenuItem();
+            pbxLogo = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            menuStrip1.SuspendLayout();
+            mnsMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbxLogo).BeginInit();
             SuspendLayout();
             // 
             // dataGridView1
@@ -54,29 +53,15 @@
             dataGridView1.Size = new Size(364, 190);
             dataGridView1.TabIndex = 0;
             // 
-            // pictureBox1
+            // mnsMenu
             // 
-            pictureBox1.Image = Properties.Resources.ChatGPT_Image_20_de_mai__de_2025__09_33_01;
-            pictureBox1.Location = new Point(371, 12);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(152, 66);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 2;
-            pictureBox1.TabStop = false;
-            // 
-            // openFileDialog1
-            // 
-            openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // menuStrip1
-            // 
-            menuStrip1.Dock = DockStyle.Right;
-            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem2, toolStripMenuItem3, toolStripMenuItem4, mnsDel, toolStripMenuItem6, mnsMarcar, toolStripMenuItem7, mnsSair });
-            menuStrip1.Location = new Point(373, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(154, 214);
-            menuStrip1.TabIndex = 3;
-            menuStrip1.Text = "menuStrip1";
+            mnsMenu.Dock = DockStyle.Right;
+            mnsMenu.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem2, toolStripMenuItem3, toolStripMenuItem4, mnsDel, toolStripMenuItem6, mnsMarcar, toolStripMenuItem7, mnsSair });
+            mnsMenu.Location = new Point(373, 0);
+            mnsMenu.Name = "mnsMenu";
+            mnsMenu.Size = new Size(154, 214);
+            mnsMenu.TabIndex = 3;
+            mnsMenu.Text = "menuStrip1";
             // 
             // toolStripMenuItem1
             // 
@@ -141,15 +126,25 @@
             mnsSair.Text = "Sair";
             mnsSair.Click += mnsSair_Click;
             // 
+            // pbxLogo
+            // 
+            pbxLogo.Image = Properties.Resources.ChatGPT_Image_20_de_mai__de_2025__09_33_01;
+            pbxLogo.Location = new Point(371, 12);
+            pbxLogo.Name = "pbxLogo";
+            pbxLogo.Size = new Size(152, 66);
+            pbxLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            pbxLogo.TabIndex = 2;
+            pbxLogo.TabStop = false;
+            // 
             // FormMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(527, 214);
-            Controls.Add(pictureBox1);
+            Controls.Add(pbxLogo);
             Controls.Add(dataGridView1);
-            Controls.Add(menuStrip1);
-            MainMenuStrip = menuStrip1;
+            Controls.Add(mnsMenu);
+            MainMenuStrip = mnsMenu;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormMenu";
@@ -157,9 +152,9 @@
             Text = "Tela do Cabeleleiro(a)";
             Load += FormMenu_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
+            mnsMenu.ResumeLayout(false);
+            mnsMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbxLogo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -169,7 +164,7 @@
         private DataGridView dataGridView1;
         private PictureBox pictureBox1;
         private OpenFileDialog openFileDialog1;
-        private MenuStrip menuStrip1;
+        private MenuStrip mnsMenu;
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripMenuItem toolStripMenuItem3;
@@ -179,5 +174,6 @@
         private ToolStripMenuItem mnsMarcar;
         private ToolStripMenuItem toolStripMenuItem7;
         private ToolStripMenuItem mnsSair;
+        private PictureBox pbxLogo;
     }
 }

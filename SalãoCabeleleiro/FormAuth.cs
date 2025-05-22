@@ -31,22 +31,25 @@ namespace SalãoCabeleleiro
                 {
                     cmdLogin.Parameters.AddWithValue("@nome", usuario);
                     cmdLogin.Parameters.AddWithValue("@senha", senha);
-
+                    
                     using (MySqlDataReader reader = cmdLogin.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             string tipo = reader.GetString("tipo");
+                            SessaoUsuario.TipoUsuario = tipo;
                             LimparCampos();
                             if (tipo == "admin")
-                            {
+                            {   
                                 FormMenu formAdmin = new FormMenu();
                                 formAdmin.Show();
+                                this.Hide();
                             }
                             else
-                            { 
+                            {
                                 FormCliente cliente = new FormCliente();
                                 cliente.Show();
+                                this.Hide();
                             }
 
                         }

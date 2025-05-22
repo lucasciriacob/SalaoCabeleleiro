@@ -21,7 +21,7 @@ namespace SalãoCabeleleiro
         private void FormMenu_Load(object sender, EventArgs e)
         {
             string connectionString = "dataSource = localhost; username = root; password =; database = bd_salao";
-            string query = "SELECT * FROM horario";
+            string query = "SELECT * FROM agendamento WHERE data >= CURDATE() ORDER BY data ASC, hora ASC";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -33,6 +33,11 @@ namespace SalãoCabeleleiro
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
                         dataGridView1.DataSource = dataTable;
+                        dataGridView1.Columns["id_agendamento"].HeaderText = "Código";
+                        dataGridView1.Columns["nome_cliente"].HeaderText = "Cliente";
+                        dataGridView1.Columns["telefone_cliente"].HeaderText = "Telefone";
+                        dataGridView1.Columns["data"].HeaderText = "Data";
+                        dataGridView1.Columns["hora"].HeaderText = "Horário";
                     }
                 }
                 catch (Exception ex)
@@ -44,19 +49,23 @@ namespace SalãoCabeleleiro
 
         private void mnsSair_Click(object sender, EventArgs e)
         {
-            this.Close();
+            FormAuth auth = new FormAuth();
+            auth.Show();
+            this.Hide();
         }
 
         private void mnsMarcar_Click(object sender, EventArgs e)
         {
             FormCliente cliente = new FormCliente();
             cliente.Show();
+            this.Hide();
         }
 
         private void mnsDel_Click(object sender, EventArgs e)
         {
             FormDeletar deletar = new FormDeletar();
             deletar.Show();
+            this.Hide();
         }
     }
 }

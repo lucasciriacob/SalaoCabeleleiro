@@ -33,10 +33,10 @@
             mskTelefone = new MaskedTextBox();
             btnAgendar = new Button();
             pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
-            cbxHorario = new ComboBox();
+            pbxVoltar = new PictureBox();
+            mskHora = new MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbxVoltar).BeginInit();
             SuspendLayout();
             // 
             // txtNome
@@ -47,22 +47,26 @@
             txtNome.Size = new Size(204, 23);
             txtNome.TabIndex = 0;
             txtNome.TextAlign = HorizontalAlignment.Center;
+            txtNome.KeyDown += txtNome_KeyDown;
             // 
             // dtpData
             // 
             dtpData.Format = DateTimePickerFormat.Short;
-            dtpData.Location = new Point(276, 149);
+            dtpData.Location = new Point(34, 218);
             dtpData.Name = "dtpData";
-            dtpData.Size = new Size(100, 23);
+            dtpData.Size = new Size(204, 23);
             dtpData.TabIndex = 2;
+            dtpData.KeyDown += dtpData_KeyDown;
             // 
             // mskTelefone
             // 
-            mskTelefone.Location = new Point(33, 149);
+            mskTelefone.Location = new Point(33, 164);
             mskTelefone.Mask = "(00) 00000-0000";
             mskTelefone.Name = "mskTelefone";
             mskTelefone.Size = new Size(204, 23);
             mskTelefone.TabIndex = 3;
+            mskTelefone.TextAlign = HorizontalAlignment.Center;
+            mskTelefone.KeyDown += mskTelefone_KeyDown;
             // 
             // btnAgendar
             // 
@@ -72,6 +76,7 @@
             btnAgendar.TabIndex = 4;
             btnAgendar.Text = "AGENDAR";
             btnAgendar.UseVisualStyleBackColor = true;
+            btnAgendar.Click += btnAgendar_Click;
             // 
             // pictureBox1
             // 
@@ -83,31 +88,35 @@
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
-            // pictureBox2
+            // pbxVoltar
             // 
-            pictureBox2.Image = Properties.Resources.botao_voltar;
-            pictureBox2.Location = new Point(2, 1);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(42, 39);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 6;
-            pictureBox2.TabStop = false;
+            pbxVoltar.Image = Properties.Resources.botao_voltar;
+            pbxVoltar.Location = new Point(2, 1);
+            pbxVoltar.Name = "pbxVoltar";
+            pbxVoltar.Size = new Size(42, 39);
+            pbxVoltar.SizeMode = PictureBoxSizeMode.Zoom;
+            pbxVoltar.TabIndex = 6;
+            pbxVoltar.TabStop = false;
+            pbxVoltar.Click += pbxVoltar_Click;
             // 
-            // cbxHorario
+            // mskHora
             // 
-            cbxHorario.FormattingEnabled = true;
-            cbxHorario.Location = new Point(33, 205);
-            cbxHorario.Name = "cbxHorario";
-            cbxHorario.Size = new Size(343, 23);
-            cbxHorario.TabIndex = 7;
+            mskHora.Location = new Point(34, 281);
+            mskHora.Mask = "90:00";
+            mskHora.Name = "mskHora";
+            mskHora.Size = new Size(204, 23);
+            mskHora.TabIndex = 8;
+            mskHora.TextAlign = HorizontalAlignment.Center;
+            mskHora.ValidatingType = typeof(DateTime);
+            mskHora.KeyDown += mskHora_KeyDown;
             // 
             // FormCliente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(397, 405);
-            Controls.Add(cbxHorario);
-            Controls.Add(pictureBox2);
+            Controls.Add(mskHora);
+            Controls.Add(pbxVoltar);
             Controls.Add(pictureBox1);
             Controls.Add(btnAgendar);
             Controls.Add(mskTelefone);
@@ -119,7 +128,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Tela do Cliente";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbxVoltar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -131,7 +140,7 @@
         private MaskedTextBox mskTelefone;
         private Button btnAgendar;
         private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
-        private ComboBox cbxHorario;
+        private PictureBox pbxVoltar;
+        private MaskedTextBox mskHora;
     }
 }
