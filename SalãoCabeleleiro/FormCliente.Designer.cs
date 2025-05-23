@@ -34,7 +34,7 @@
             btnAgendar = new Button();
             pictureBox1 = new PictureBox();
             pbxVoltar = new PictureBox();
-            mskHora = new MaskedTextBox();
+            cbxHora = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbxVoltar).BeginInit();
             SuspendLayout();
@@ -56,6 +56,7 @@
             dtpData.Name = "dtpData";
             dtpData.Size = new Size(204, 23);
             dtpData.TabIndex = 2;
+            dtpData.ValueChanged += dtpData_ValueChanged;
             dtpData.KeyDown += dtpData_KeyDown;
             // 
             // mskTelefone
@@ -99,23 +100,20 @@
             pbxVoltar.TabStop = false;
             pbxVoltar.Click += pbxVoltar_Click;
             // 
-            // mskHora
+            // cbxHora
             // 
-            mskHora.Location = new Point(34, 281);
-            mskHora.Mask = "90:00";
-            mskHora.Name = "mskHora";
-            mskHora.Size = new Size(204, 23);
-            mskHora.TabIndex = 8;
-            mskHora.TextAlign = HorizontalAlignment.Center;
-            mskHora.ValidatingType = typeof(DateTime);
-            mskHora.KeyDown += mskHora_KeyDown;
+            cbxHora.FormattingEnabled = true;
+            cbxHora.Location = new Point(33, 281);
+            cbxHora.Name = "cbxHora";
+            cbxHora.Size = new Size(204, 23);
+            cbxHora.TabIndex = 9;
             // 
             // FormCliente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(397, 405);
-            Controls.Add(mskHora);
+            Controls.Add(cbxHora);
             Controls.Add(pbxVoltar);
             Controls.Add(pictureBox1);
             Controls.Add(btnAgendar);
@@ -127,6 +125,7 @@
             Name = "FormCliente";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Tela do Cliente";
+            Load += FormCliente_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbxVoltar).EndInit();
             ResumeLayout(false);
@@ -141,6 +140,6 @@
         private Button btnAgendar;
         private PictureBox pictureBox1;
         private PictureBox pbxVoltar;
-        private MaskedTextBox mskHora;
+        private ComboBox cbxHora;
     }
 }

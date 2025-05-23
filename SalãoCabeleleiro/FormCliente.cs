@@ -25,7 +25,7 @@ namespace SalãoCabeleleiro
         private void PreencherCampos()
         {
             if (string.IsNullOrWhiteSpace(txtNome.Text) || string.IsNullOrWhiteSpace(mskTelefone.Text)
-                || string.IsNullOrWhiteSpace(mskHora.Text))
+                || string.IsNullOrWhiteSpace(cbxHora.Text))
             {
                 MessageBox.Show("Preencha todos os campos.");
                 return;
@@ -35,8 +35,44 @@ namespace SalãoCabeleleiro
         {
             txtNome.Clear();
             mskTelefone.Clear();
-            mskHora.Clear();
             dtpData.Value = DateTime.Now;
+            cbxHora.SelectedIndex = -1;
+            cbxHora.Text = "";
+        }
+        private void CarregarHorariosDisponiveis(DateTime dataSelecionada)
+        {
+            cbxHora.Items.Clear();
+            string connectionString = "datasource=localhost;username=root;password=;database=bd_salao";
+            List<string> todosHorarios = new List<string>
+            {
+                "08:00", "08:30", "09:00", "09:30", "10:00", "10:30",
+                "11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
+                "14:00", "14:30", "15:00", "15:30", "16:00", "16:30",
+                "17:00", "17:30", "18:00"
+            };
+
+            using (MySqlConnection conexao = new MySqlConnection(connectionString))
+            {
+                conexao.Open();
+                string query = "SELECT hora FROM agendamento WHERE data = @data";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@data", dataSelecionada.ToString("yyyy-MM-dd"));
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            TimeSpan hora = reader.GetTimeSpan("hora");
+                            string horaAgendada = hora.ToString(@"hh\:mm");
+                            todosHorarios.Remove(horaAgendada);
+                        }
+                    }
+                }
+            }
+
+            cbxHora.Items.AddRange(todosHorarios.ToArray());
         }
         private void btnAgendar_Click(object sender, EventArgs e)
         {
@@ -56,13 +92,13 @@ namespace SalãoCabeleleiro
                     cmdAgendar.Parameters.AddWithValue("@nome_cliente", txtNome.Text);
                     cmdAgendar.Parameters.AddWithValue("@telefone_cliente", mskTelefone.Text);
                     cmdAgendar.Parameters.AddWithValue("@data", dtpData.Value.ToString("yyyy-MM-dd"));
-                    cmdAgendar.Parameters.AddWithValue("@hora", mskHora.Text);
+                    cmdAgendar.Parameters.AddWithValue("@hora", cbxHora.Text);
                     try
                     {
                         cmdAgendar.ExecuteNonQuery();
-
                         MessageBox.Show("Agendamento realizado com sucesso!");
                         LimparCampos();
+                        CarregarHorariosDisponiveis(dtpData.Value);
                     }
                     catch (MySqlException ex)
                     {
@@ -75,14 +111,9 @@ namespace SalãoCabeleleiro
                             MessageBox.Show("Erro ao agendar: " + ex.Message);
                         }
                     }
-
-
                 }
             }
-
-
         }
-
         private void pbxVoltar_Click(object sender, EventArgs e)
         {
             if (SessaoUsuario.TipoUsuario == "admin")
@@ -95,7 +126,6 @@ namespace SalãoCabeleleiro
                 FormAuth formCliente = new FormAuth();
                 formCliente.Show();
             }
-
             this.Hide();
         }
 
@@ -119,16 +149,18 @@ namespace SalãoCabeleleiro
         {
             if (e.KeyCode == Keys.Enter)
             {
-                mskHora.Focus();
+                cbxHora.Focus();
             }
         }
 
-        private void mskHora_KeyDown(object sender, KeyEventArgs e)
+        private void dtpData_ValueChanged(object sender, EventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
-            {
-                btnAgendar.PerformClick();
-            }
+            CarregarHorariosDisponiveis(dtpData.Value);
+        }
+
+        private void FormCliente_Load(object sender, EventArgs e)
+        {
+            CarregarHorariosDisponiveis(dtpData.Value);
         }
     }
 }
