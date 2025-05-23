@@ -25,7 +25,7 @@ namespace SalãoCabeleleiro
         private void PreencherCampos()
         {
             if (string.IsNullOrWhiteSpace(txtNome.Text) || string.IsNullOrWhiteSpace(mskTelefone.Text)
-                || string.IsNullOrWhiteSpace(cbxHora.Text))
+                || string.IsNullOrWhiteSpace(cbxHora.Text) || cbxHora.SelectedIndex <= 0)
             {
                 MessageBox.Show("Preencha todos os campos.");
                 return;
@@ -71,7 +71,11 @@ namespace SalãoCabeleleiro
                     }
                 }
             }
+            cbxHora.Items.Clear();
+            cbxHora.Items.Add("Selecione um horário..."); 
 
+            cbxHora.Items.AddRange(todosHorarios.ToArray());
+            cbxHora.SelectedIndex = 0; 
             cbxHora.Items.AddRange(todosHorarios.ToArray());
         }
         private void btnAgendar_Click(object sender, EventArgs e)
