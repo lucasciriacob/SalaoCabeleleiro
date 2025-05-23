@@ -40,6 +40,7 @@
             toolStripMenuItem7 = new ToolStripMenuItem();
             mnsSair = new ToolStripMenuItem();
             pbxLogo = new PictureBox();
+            txtPesquisar = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             mnsMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbxLogo).BeginInit();
@@ -48,7 +49,7 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(1, 12);
+            dataGridView1.Location = new Point(3, 40);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(364, 190);
             dataGridView1.TabIndex = 0;
@@ -59,7 +60,7 @@
             mnsMenu.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem2, toolStripMenuItem3, toolStripMenuItem4, mnsDel, toolStripMenuItem6, mnsMarcar, toolStripMenuItem7, mnsSair });
             mnsMenu.Location = new Point(373, 0);
             mnsMenu.Name = "mnsMenu";
-            mnsMenu.Size = new Size(154, 214);
+            mnsMenu.Size = new Size(154, 230);
             mnsMenu.TabIndex = 3;
             mnsMenu.Text = "menuStrip1";
             // 
@@ -136,11 +137,20 @@
             pbxLogo.TabIndex = 2;
             pbxLogo.TabStop = false;
             // 
+            // txtPesquisar
+            // 
+            txtPesquisar.Location = new Point(27, 14);
+            txtPesquisar.Name = "txtPesquisar";
+            txtPesquisar.Size = new Size(316, 23);
+            txtPesquisar.TabIndex = 4;
+            txtPesquisar.TextChanged += txtPesquisar_TextChanged;
+            // 
             // FormMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(527, 214);
+            ClientSize = new Size(527, 230);
+            Controls.Add(txtPesquisar);
             Controls.Add(pbxLogo);
             Controls.Add(dataGridView1);
             Controls.Add(mnsMenu);
@@ -175,5 +185,6 @@
         private ToolStripMenuItem toolStripMenuItem7;
         private ToolStripMenuItem mnsSair;
         private PictureBox pbxLogo;
+        private TextBox txtPesquisar;
     }
 }

@@ -17,10 +17,11 @@ namespace SalãoCabeleleiro
         {
             InitializeComponent();
         }
-
+        private BindingSource bs = new BindingSource();
+        private DataTable dt = new DataTable();
         private void FormMenu_Load(object sender, EventArgs e)
         {
-            string connectionString = "dataSource = localhost; username = root; password =; database = bd_salao";
+            string connectionString = "dataSource=localhost;username=root;password=;database=bd_salao";
             string query = "SELECT * FROM agendamento WHERE data >= CURDATE() ORDER BY data ASC, hora ASC";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -30,9 +31,11 @@ namespace SalãoCabeleleiro
                     connection.Open();
                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection))
                     {
-                        DataTable dataTable = new DataTable();
-                        adapter.Fill(dataTable);
-                        dataGridView1.DataSource = dataTable;
+                        dt.Clear();
+                        adapter.Fill(dt);          
+                        bs.DataSource = dt;         
+                        dataGridView1.DataSource = bs; 
+
                         dataGridView1.Columns["id_agendamento"].HeaderText = "Código";
                         dataGridView1.Columns["nome_cliente"].HeaderText = "Cliente";
                         dataGridView1.Columns["telefone_cliente"].HeaderText = "Telefone";
@@ -66,6 +69,19 @@ namespace SalãoCabeleleiro
             FormDeletar deletar = new FormDeletar();
             deletar.Show();
             this.Hide();
+        }
+        private void txtPesquisar_TextChanged(object sender, EventArgs e)
+        {
+            string filtro = txtPesquisar.Text.Trim().Replace("'", "''"); 
+
+            if (string.IsNullOrEmpty(filtro))
+            {
+                bs.RemoveFilter();  
+            }
+            else
+            {
+                bs.Filter = $"nome_cliente LIKE '%{filtro}%' OR telefone_cliente LIKE '%{filtro}%'";
+            }
         }
     }
 }
